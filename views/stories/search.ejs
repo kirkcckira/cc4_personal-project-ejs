@@ -1,0 +1,37 @@
+<%- include('../partials/header')%>
+
+<div class="container mb-4">
+    <div class="row mt-4">
+        <% if(tag != undefined) { %>
+        <h3>Search from tag: <%= tag %></h3>
+        <% } else if(query == ""){ %>
+        <h3>Showing all story!</h3>
+        <% } else { %>
+        <h3>Seach result for: <%= query %></h3>
+        <% } %>
+    </div>
+    <hr>
+    <% story.forEach(item => { %>
+    <div class="row">
+        <h3 class="mb-4"><%= item.title %></h3>
+    </div>
+    <% if(item.image) {%>
+    <div class="row">
+        <img src="<%= item.image[0] %>" class="img-fluid img-thumbnail mx-auto"
+            style="max-width: 700px; max-height: 450px;">
+    </div>
+    <% }%>
+    <div class="row justify-content-between">
+        <p>Date : <%= date %> </p>
+        <p>By <%= item.author.name %></p>
+    </div>
+    <div class="row">
+        <p><%= item.body.substring(0, 150) %>...</p>
+    </div>
+    <div class="row">
+        <a href="/story/<%= item.storyCount %>"> Read More</a>
+    </div>
+    <hr>
+    <% }) %>
+</div>
+<%- include('../partials/footer')%>

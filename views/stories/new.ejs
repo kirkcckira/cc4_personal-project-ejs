@@ -1,0 +1,25 @@
+<%- include('../partials/header')%>
+
+<div class="container">
+    <h1>Tell us about your story!</h1>
+
+    <form method="POST" action="/story">
+        <div class="form-group">
+            <input class="form-control" type="text" id="title" name="title" placeholder="Title" required></input>
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="text" id="image" name="image"
+                placeholder="e.g. http://www.url1.com,http://www.url2.com"></input>
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="text" id="tag" name="tag" placeholder="e.g. funny,happy,short"></input>
+        </div>
+        <div class="form-group">
+            <textarea class="form-control" row="10" col="50" id="body" name="body" placeholder="Your story."
+                required></textarea>
+        </div>
+        <input class="btn btn-success" type="submit" value="Submit">
+    </form>
+
+</div>
+<%- include('../partials/footer')%>

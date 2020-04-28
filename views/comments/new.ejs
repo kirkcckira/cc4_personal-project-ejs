@@ -1,0 +1,23 @@
+<%- include('../partials/header')%>
+<div class="container">
+    <div class="row">
+        <div style='width: 50%; margin: 30px auto;'>
+            <h3 style="text-align: center;">Add a new comment</h3>
+            <form action="/story/<%= story.storyCount %>/comments/" method="POST">
+                <div class='form-group'>
+                    <textarea class='form-control' type="text" name="comment" id="comment"
+                        placeholder="What do you think?" rows="5"></textarea>
+                </div>
+                <% if(!currentUser) {%>
+                <div class='form-group'>
+                    <input class='form-control' type="text" name="commentator" id="commentator"
+                        placeholder="Your handle name">
+                </div>
+                <% } %>
+                <button class="btn btn-success">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<%- include('../partials/footer')%>

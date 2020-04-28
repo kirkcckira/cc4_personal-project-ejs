@@ -1,0 +1,36 @@
+<%- include('../partials/header')%>
+<div class="container mb-4 mt-3">
+    <% allStory.forEach(item => { %>
+    <div class="row my-3">
+        <h3><%= item.title %></h3>
+    </div>
+    <% if(item.image) {%>
+    <div class="row">
+        <img src="<%= item.image[0] %>" class="img-fluid img-thumbnail mx-auto"
+            style="max-width: 700px; max-height: 450px;">
+    </div>
+    <% }%>
+    <div class="row my-3">
+        <% let date = item.createdDate.getDate()+"-"+item.createdDate.getMonth()+"-"+item.createdDate.getFullYear() %>
+        <span>Posted date : <%= date %> </span>
+        <span class="mx-3">By <a href="/user/<%= item.author.name %>"
+                style="text-decoration: none;"><%= item.author.name %></a></span>
+    </div>
+    <% if(item.tag) { %>
+    <div class="row">
+        <span>Tags: </span>
+        <% item.tag.forEach(tag => { %>
+        <a href="/story/tag/<%= tag %>" class="mx-1"><%= tag %></a>
+        <% }) %>
+    </div>
+    <% } %>
+    <div class="row mt-3">
+        <p><%= item.body.substring(0, 150) %>...</p>
+    </div>
+    <div class="row">
+        <a href="/story/<%= item.storyCount %>"> Read More</a>
+    </div>
+    <hr>
+    <% }) %>
+</div>
+<%- include('../partials/footer')%>

@@ -1,0 +1,24 @@
+<%- include('../partials/header')%>
+
+<div class="container">
+    <h1>Edit your story</h1>
+
+    <form action='/story/<%= story.storyCount %>?_method=PUT' method='POST'>
+        <div class="form-group">
+            <input class="form-control" type="text" id="title" name="title" value="<%= story.title %>"></input>
+        </div>
+        <div class=" form-group">
+            <input class="form-control" type="text" id="image" name="image"
+                value="<%= story.image.toString() %>"></input>
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="text" id="tag" name="tag" value="<%= story.tag.toString() %>"></input>
+        </div>
+        <div class="form-group">
+            <textarea class="form-control" row="10" col="50" id="body" name="body"><%= story.body %></textarea>
+        </div>
+        <input class="btn btn-success" type="submit" value="Submit">
+    </form>
+
+</div>
+<%- include('../partials/footer')%>

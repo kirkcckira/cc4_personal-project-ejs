@@ -1,0 +1,17 @@
+<%- include('../partials/header')%>
+
+<div class="container">
+    <div class="row">
+        <div style='width: 50%; margin: 30px auto;'>
+            <h3 style="text-align: center;">Edit your comment</h3>
+            <form action="/story/<%= storyCount %>/comments/<%= comment._id %>?_method=PUT" method="POST">
+                <div class='form-group'>
+                    <textarea class='form-control' type="text" name="comment" id="comment"
+                        rows="5"><%= comment.comment %></textarea>
+                </div>
+                <button class="btn btn-success">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+<%- include('../partials/footer')%>
