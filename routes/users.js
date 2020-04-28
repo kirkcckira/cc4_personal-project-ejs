@@ -1,7 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const User = require("../models/user");
 const passport = require("passport");
+
+const User = require("../models/user");
+const Story = require("../models/story");
+const middleware = require("../middleware/middleware");
 
 ////
 
@@ -34,11 +37,20 @@ router.get("/logout", (req, res) => {
 
 // INDEX
 router.get("/", (req, res) => {
-  let allUser;
-  User.find({}, (err, data) => {
-    allUser = data;
-    res.render("./users/index", { allUser: allUser });
+  let allUser = [];
+  let allContributor;
+  Story.find({}, (err, data) => {
+    data.forEach((story) => {
+      allUser.push(story.author.name);
+    });
+    allContributor = new Set(allUser);
+    res.render("./users/index", { allContributor: allContributor });
   });
+  // let allUser;
+  // User.find({}, (err, data) => {
+  //   allUser = data;
+  //   res.render("./users/index", { allUser: allUser });
+  // });
 });
 // NEW
 router.get("/new", (req, res) => {
@@ -72,18 +84,23 @@ router.post("/", (req, res) => {
 // SHOW - not owner
 router.get("/:name", (req, res) => {
   let userName = req.params.name;
-  User.find({ name: userName }, (err, data) => {
-    res.render("./users/show", { data: data });
+  Story.find({ "author.name": userName }, (err, story) => {
+    res.render("./users/show", { user: userName, story: story });
   });
 });
 
 // SHOW - owner
-router.get("/:name/profile", (req, res) => {
-  let userName = req.params.name;
-  User.find({ name: userName }, (err, data) => {
-    res.render("./users/profile", { data: data });
-  });
-});
+router.get(
+  "/:name/profile",
+  middleware.isLoggedin,
+  middleware.checkUserOwnership,
+  (req, res) => {
+    let userName = req.params.name;
+    User.find({ name: userName }, (err, data) => {
+      res.render("./users/profile", { data: data });
+    });
+  }
+);
 // EDIT
 router.post("/:id/edit", (req, res) => {
   res.send("Hello from edit");

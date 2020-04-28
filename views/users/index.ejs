@@ -1,10 +1,11 @@
 <%- include('../partials/header')%>
 <div class="container mb-4">
-    <% allUser.forEach(item => { %>
-    <% if(currentUser && item.name === currentUser.name) { %>
-    <h3><a href="/user/<%= item.name %>/profile"><%= item.name %></a></h3>
+    <h3>List of our contributors!</h3>
+    <% allContributor.forEach(item => { %>
+    <% if(currentUser && item === currentUser.name) { %>
+    <h3><a href="/user/<%= item %>/profile"><%= item %></a></h3>
     <% } else { %>
-    <h3><a href="/user/<%= item.name %>"><%= item.name %></a></h3>
+    <h3><a href="/user/<%= item %>"><%= item %></a></h3>
     <% } %>
     <hr>
     <% }) %>
